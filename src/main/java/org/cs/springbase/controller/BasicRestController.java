@@ -4,7 +4,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cs.springbase.services.PowerOfAttorney;
+import org.cs.springbase.services.interfaces.PowerOfAttorneyServiceInterface;
 import org.cs.springbase.util.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ public class BasicRestController {
 	Logger log = LoggerFactory.getLogger(BasicRestController.class);
 
 	@Autowired
-	private PowerOfAttorney powerOfAttorney;
+	private PowerOfAttorneyServiceInterface powerOfAttorney;
 
 	@RequestMapping("/listAccounts")
 	public List<JsonNode> listAccounts(Principal principal) {

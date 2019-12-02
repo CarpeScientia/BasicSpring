@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.cs.springbase.services.interfaces.PowerOfAttorneyServiceInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class PowerOfAttorney {
+public class PowerOfAttorneyService implements PowerOfAttorneyServiceInterface {
 	private static final String POA_ID = "id";
 	private static final String GET_ALL_POAS = "/power-of-attorneys";
 	private static final String GIVEN_KEY = "grantee";
@@ -32,13 +33,14 @@ public class PowerOfAttorney {
 	private static final String POA_STATUS = "status";
 	private static final String POA_STATUS_ACTIVE = "ACTIVE";
 
-	Logger log = LoggerFactory.getLogger(PowerOfAttorney.class);
+	Logger log = LoggerFactory.getLogger(PowerOfAttorneyService.class);
 	@Autowired
 	RestTemplate restTemplate;//docs say it is threadsafe
 
 	@Value( "${powerofattorney.url}" )
 	private String poaUrl;
 
+	@Override
 	@Cacheable("powerOfAtterneys")//TODO set timed eviction policy
 	public Map<String, List<JsonNode>> powerOfAttorneys(){
 		ResponseEntity<String> response;
@@ -108,6 +110,7 @@ public class PowerOfAttorney {
 		return response;
 	}
 
+	@Override
 	public Collection<? extends JsonNode> fetchActiveCards(JsonNode cardArrayNode) {
 		if( !cardArrayNode.has(CARD_ARRAY_KEY)) {
 			if(log.isDebugEnabled()) log.debug("No cards json array found in " + cardArrayNode );
@@ -116,7 +119,7 @@ public class PowerOfAttorney {
 		List<JsonNode> activeCards = new ArrayList<>();
 		JsonNode cardArray = cardArrayNode.get(CARD_ARRAY_KEY);
 		if( !cardArray.isArray() ) {
-			if(log.isDebugEnabled()) log.debug("cards is not a json array in " + cardArrayNode );
+			log.warn("cards is not a json array in " + cardArrayNode );
 			return Collections.emptyList();
 		}
 		cardArray.forEach(aCardId->{
