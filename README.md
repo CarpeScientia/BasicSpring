@@ -6,7 +6,7 @@
   - Rest call: /listCards : list accounts for the current logged-in user
   - Todo: add some mocking tests, cache eviction policy, [B,S]crypt for passwords, better UI, more calls, etc. etc.
 
-**Clone with 'git clone --recurse-submodules'  or 'git clone --recursive' depending on git version or run 'git submodule update --init --recursive' after normal clone
+**Clone with:** 'git clone --recurse-submodules'  or 'git clone --recursive' depending on git version or run 'git submodule update --init --recursive' after normal clone
 **To build and run:** use `mvn -f powerOfAttorneyService/pom.xml compile exec:java && mvn spring-boot:run`
 **Application runs on:** https://localhost:8443
 
