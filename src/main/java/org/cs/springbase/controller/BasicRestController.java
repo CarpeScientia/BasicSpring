@@ -1,6 +1,7 @@
 package org.cs.springbase.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cs.springbase.services.PowerOfAttorney;
@@ -21,12 +22,26 @@ public class BasicRestController {
 	private PowerOfAttorney powerOfAttorney;
 
 	@RequestMapping("/listAccounts")
-	public List<JsonNode> myAccounts(Principal principal) {
+	public List<JsonNode> listAccounts(Principal principal) {
 		log.info("getting account for principal: " + principal.getName());
 		List<JsonNode> result =  
 				powerOfAttorney.powerOfAttorneys().get(UserUtil.underscoresToSpaces(principal.getName()));
 		if(log.isDebugEnabled()) log.debug("getting account for principal: " 
 				+ UserUtil.underscoresToSpaces(principal.getName()));
 		return result;
+	}
+	
+	@RequestMapping("/listCards")
+	public List<JsonNode> listCards(Principal principal) {
+		log.info("getting cards for principal: " + principal.getName());
+		List<JsonNode> paos =  
+				powerOfAttorney.powerOfAttorneys().get(UserUtil.underscoresToSpaces(principal.getName()));
+		List<JsonNode> cards =  new ArrayList<>();
+		paos.forEach(aPao->{
+			cards.addAll(powerOfAttorney.fetchActiveCards(aPao));
+		});
+		if(log.isDebugEnabled()) log.debug("getting card for principal: " 
+				+ UserUtil.underscoresToSpaces(principal.getName()));
+		return cards;
 	}
 }

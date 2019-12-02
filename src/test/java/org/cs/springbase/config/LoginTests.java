@@ -1,4 +1,4 @@
-package org.cs.springbase;
+package org.cs.springbase.config;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
