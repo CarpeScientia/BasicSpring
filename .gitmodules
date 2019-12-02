@@ -1,0 +1,3 @@
+[submodule "powerOfAttorneyService"]
+	path = powerOfAttorneyService
+	url = git@github.com:CarpeScientia/POAServ.git
