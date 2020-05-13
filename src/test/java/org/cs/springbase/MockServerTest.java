@@ -3,8 +3,6 @@ package org.cs.springbase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
-import MainApplicationTest;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

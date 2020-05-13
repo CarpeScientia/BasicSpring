@@ -1,5 +1,6 @@
 package org.cs.springbase.config;
 
+import org.cs.springbase.MainApplicationTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = {MainApplicationTest.class})
 @AutoConfigureMockMvc
 public class LoginTests {
 	@Autowired

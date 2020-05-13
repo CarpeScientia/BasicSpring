@@ -1,5 +1,6 @@
 package org.cs.springbase.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -17,6 +18,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	}
 	
 	@Bean
+	@Qualifier("httpRestTemplate")
 	public RestTemplate restTemplate() {
 	    return new RestTemplate();
 	}
